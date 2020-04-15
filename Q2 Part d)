@@ -1,0 +1,6 @@
+SELECT m.LastName, m.FirstName, m.MemberID FROM Member m
+WHERE m.MemberID IN
+(
+  SELECT MemberID FROM Entry e
+  GROUP BY MemberID HAVING COUNT(DISTINCT Year) = (SELECT COUNT(DISTINCT Year) FROM Entry)
+);
